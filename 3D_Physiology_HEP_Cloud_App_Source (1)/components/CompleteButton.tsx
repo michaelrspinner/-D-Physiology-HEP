@@ -1,0 +1,2 @@
+'use client'; import {useState} from 'react'; import {createClient} from '@/lib/supabase/client';
+export default function CompleteButton({id,patientId}:{id:string,patientId:string}){const [done,setDone]=useState(false);async function mark(){const {error}=await createClient().from('exercise_completions').insert({patient_id:patientId,program_exercise_id:id});if(!error)setDone(true);else alert(error.message)}return <button className={done?'done':'complete'} disabled={done} onClick={mark}>{done?'Completed ✓':'Mark complete'}</button>}
